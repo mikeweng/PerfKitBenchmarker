@@ -304,10 +304,10 @@ def _CompileHpccAmdBlis(vm):
   vm.RemoteCommand('cp %s/hpl/setup/%s %s' %
                    (HPCC_DIR, HPCC_MAKEFILE_CBLAS, HPCC_MAKEFILE_PATH_AMD_BLIS))
   sed_cmd = ('sed -i -e "/^MP/d" -e "s|gcc|mpicc|" -e "s|g77|mpicc|" '
-             r'-e "s|\\$(HOME)/netlib/ARCHIVES/Linux_PII|%s|" '
-             r'-e "s|libcblas.*|lib/zen/libblis.a|" '
-             r'-e "s|-funroll-loops|-funroll-loops -std=c99|" '
-             r'-e "s|\\-lm|\\-lgfortran \\-lm|" %s' %
+             '-e "s|\\$(HOME)/netlib/ARCHIVES/Linux_PII|%s|" '
+             '-e "s|libcblas.*|lib/zen/libblis.a|" '
+             '-e "s|-funroll-loops|-funroll-loops -std=c99|" '
+             '-e "s|\\-lm|\\-lgfortran \\-lm|" %s' %
              (re.escape(amdblis.AMDBLIS_DIR), HPCC_MAKEFILE_PATH_AMD_BLIS))
   vm.RemoteCommand(sed_cmd)
   vm.RemoteCommand('cd %s; make arch=AMD_BLIS' % HPCC_DIR)
